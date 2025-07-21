@@ -19,7 +19,7 @@ const GasSimulator = () => {
   const chains = useAppStore((state) => state.chains);
   const usdPrice = useAppStore((state) => state.usdPrice);
 
-  const calculateGasCost = (): SimulationResult[] => {
+  const results = useMemo(() => {
     if (!transactionValue || parseFloat(transactionValue) <= 0 || !usdPrice || usdPrice === 0) return [];
 
     const value = parseFloat(transactionValue);
@@ -53,9 +53,7 @@ const GasSimulator = () => {
         };
       })
       .filter(Boolean) as SimulationResult[];
-  };
-
-  const results = useMemo(() => calculateGasCost(), [transactionValue, chains, usdPrice, transactionType]);
+  }, [transactionValue, chains, usdPrice, transactionType]);
 
   return (
     <div style={{ background: '#222', color: '#fff', padding: 16, borderRadius: 8, marginTop: 16 }}>

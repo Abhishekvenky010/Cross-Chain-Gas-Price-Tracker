@@ -12,8 +12,8 @@ const NodeInterface__factory = new ethers.Interface([
   'function gasEstimateComponents(address to, bool contractCreation, bytes calldata data) external view returns (uint64 gasEstimate, uint64 gasEstimateForL1, uint256 baseFee, uint256 l1BaseFeeEstimate)',
 ]);
 
-let providers: Partial<Record<Chain, WebSocketProvider>> = {};
-let intervalIds: Partial<Record<Chain, NodeJS.Timeout>> = {};
+const providers: Partial<Record<Chain, WebSocketProvider>> = {};
+const intervalIds: Partial<Record<Chain, NodeJS.Timeout>> = {};
 
 export function startGasEngine() {
   (['ethereum', 'polygon', 'arbitrum'] as Chain[]).forEach((chain) => {
